@@ -5,6 +5,7 @@ import { IoIosWater } from 'react-icons/io';
 import { FiWind } from 'react-icons/fi';
 import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
 import { WeatherDetailsProps } from '../../utils/types';
+import { capitalizeFirstLetter } from '../../utils/formatData';
 
 export function WeatherDetails({ details }: WeatherDetailsProps) {
   return (
@@ -45,7 +46,7 @@ export function WeatherDetails({ details }: WeatherDetailsProps) {
               `http://openweathermap.org/img/wn/${detail.weather[0].icon}.png`
             }
             />
-            <Text>{detail.weather[0].description}</Text>
+            <Text>{capitalizeFirstLetter(detail.weather[0].description)}</Text>
           </Flex>
           <Flex justifyContent={['center', 'space-between']} align="center">
             <Flex direction="column" display={['none', 'flex']}>

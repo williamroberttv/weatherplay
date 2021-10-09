@@ -1,9 +1,7 @@
 import { Button, Flex, Text } from '@chakra-ui/react';
 import { BiNavigation } from 'react-icons/bi';
-
-type HeaderProps = {
-  getCoords: () => void;
-}
+import { Link } from 'react-router-dom';
+import { HeaderProps } from '../../utils/types';
 
 export function Header({ getCoords }: HeaderProps) {
   return (
@@ -24,23 +22,27 @@ export function Header({ getCoords }: HeaderProps) {
           WeatherPlay
         </Text>
         <Flex height="5rem" align="center">
-          <Button
-            fontSize="16px"
-            mr="16px"
-            bg="transparent"
-            transition="background 0.2s"
-            _hover={{ bg: '#8067E5' }}
-          >
-            Home
-          </Button>
-          <Button
-            fontSize="16px"
-            bg="transparent"
-            transition="background 0.2s"
-            _hover={{ bg: '#8067E5' }}
-          >
-            Playlist
-          </Button>
+          <Link to="/">
+            <Button
+              fontSize="16px"
+              mr="16px"
+              bg="transparent"
+              transition="background 0.2s"
+              _hover={{ bg: '#8067E5' }}
+            >
+              Home
+            </Button>
+          </Link>
+          <Link to="/playlists">
+            <Button
+              fontSize="16px"
+              bg="transparent"
+              transition="background 0.2s"
+              _hover={{ bg: '#8067E5' }}
+            >
+              Playlist
+            </Button>
+          </Link>
         </Flex>
         <Button
           bg="#8067E5"
