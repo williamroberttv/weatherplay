@@ -4,6 +4,7 @@ export const weatherApi = axios.create({
   baseURL: 'https://api.openweathermap.org/data/2.5/weather',
   params: {
     appid: 'd15f04b81dd8d82de872d8630570ac3c',
+    lang: 'pt_br',
   },
 });
 
