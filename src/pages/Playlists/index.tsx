@@ -16,13 +16,14 @@ export function Playlists() {
   const [displayPlaylist] = useState<DisplayPlaylist>({
     genre,
     weather: weatherData,
-    myPlaylist: playlist,
+    playlist,
     id: (Math.random() * 100000).toFixed(0),
   });
   const [savedPlaylists, setSavedPlaylists] = useState<DisplayPlaylist[]>([]);
 
   const getSavedPlaylists = () => {
     setSavedPlaylists((state) => [...state, displayPlaylist]);
+    localStorage.setItem('playlist', JSON.stringify(savedPlaylists));
   };
 
   const handleDelete = (id: string) => {
@@ -68,7 +69,7 @@ export function Playlists() {
 
           </Text>
           {weatherData.map((item) => (
-            <Flex>
+            <Flex key={item.weather[0].id}>
               <Text
                 mr="16px"
                 fontSize="18px"
@@ -90,6 +91,7 @@ export function Playlists() {
         <Flex direction="column" w="100%" m="0 auto">
           {playlist.map((list) => (
             <Flex
+              key={list.track.url}
               bg="#141414"
               borderRadius="10px"
               mb="20px"
@@ -138,7 +140,13 @@ export function Playlists() {
           <Text fontSize="18px" fontWeight="bold">Playlists Salvas</Text>
           {savedPlaylists.length > 0 && savedPlaylists.map(
             (item) => (
-              <Flex bg="#8067E5" p="20px" borderRadius="8px" m="20px 0">
+              <Flex
+                key={item.id}
+                bg="#8067E5"
+                p="20px"
+                borderRadius="8px"
+                m="20px 0"
+              >
                 <Flex direction="column">
                   <Text mr="16px">{item.genre.toUpperCase()}</Text>
                   {item.weather.map((data) => (
@@ -162,7 +170,7 @@ export function Playlists() {
                     bg="#8067E5"
                     ml="10px"
                     onClick={() => {
-                      getPlaylist(item.myPlaylist);
+                      getPlaylist(item.playlist);
                       getWeatherData(item.weather);
                     }}
                   >

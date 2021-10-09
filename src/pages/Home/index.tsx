@@ -2,7 +2,7 @@ import {
   Box, Button, Flex, Text,
 } from '@chakra-ui/react';
 import { AxiosResponse } from 'axios';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import { useWeather } from '../../context/weatherContext';
@@ -14,6 +14,7 @@ import { shazamApi, weatherApi } from '../../services/api';
 import { formatData } from '../../utils/formatData';
 
 export function Home() {
+  const history = useHistory();
   const [coordinates, setCoordinates] = useState<Coordinates>();
   const {
     weatherData,
@@ -61,7 +62,8 @@ export function Home() {
       },
     );
     const usedData = data.tracks.hits.map((item) => item);
-    getPlaylist([...usedData]);
+    getPlaylist(usedData);
+    history.push('/playlists');
   };
 
   useEffect(() => {
@@ -99,20 +101,18 @@ export function Home() {
       {weatherData.length > 0 && (
       <Box align="center" w="300px" m="20px auto">
         <Text mb="20px">Sua playlist está pronta, confira!</Text>
-        <Link to="/playlists">
-          <Button
-            w="100%"
-            height="50px"
-            p="0"
-            type="button"
-            onClick={handlePlaylist}
-            bg="#8067E5"
-            transition="filter 0.2s"
-            _hover={{ filter: 'brightness(0.9)' }}
-          >
-            Playlist
-          </Button>
-        </Link>
+        <Button
+          w="100%"
+          height="50px"
+          p="0"
+          type="button"
+          onClick={handlePlaylist}
+          bg="#8067E5"
+          transition="filter 0.2s"
+          _hover={{ filter: 'brightness(0.9)' }}
+        >
+          Playlist
+        </Button>
       </Box>
       )}
     </Box>

@@ -78,7 +78,7 @@ export type SearchProps = {
 export type DisplayPlaylist = {
   genre: string;
   weather: WeatherData[];
-  myPlaylist: PlaylistData[];
+  playlist: PlaylistData[];
   id: string;
 }
 export type HeaderProps = {
