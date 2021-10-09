@@ -1,6 +1,15 @@
+import { ChakraProvider } from '@chakra-ui/react';
+import { WeatherProvider } from './context/weatherContext';
+import { Routes } from './routes';
+import theme from './styles/global';
+
 function App() {
   return (
-    <div> Hello World </div>
+    <ChakraProvider theme={theme}>
+      <WeatherProvider>
+        <Routes />
+      </WeatherProvider>
+    </ChakraProvider>
   );
 }
 
